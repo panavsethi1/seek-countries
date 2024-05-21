@@ -4,7 +4,7 @@ export const FIELDS_PARAM =
 
 export enum Region {
 	AFRICA = 'Africa',
-	AMERICA = 'America',
+	AMERICAS = 'Americas',
 	ASIA = 'Asia',
 	EUROPE = 'Europe',
 	OCEANIA = 'Oceania',

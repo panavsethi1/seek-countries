@@ -1,26 +1,43 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+// NPM
+import axios from 'axios';
+import { Input, Select } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+
+// Constants
 import { BASE_URL, FIELDS_PARAM, Region } from '../../global/constants';
+
+// Recoil
 import {
 	CountriesSearchSelector,
 	CountriesState,
 } from '../../store/CountriesAtom';
-import { Input, Select } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+// Components
+import CountryCard from './CountryCard';
+
+// Styles
 import './styles/countries.css';
 
 function Countries() {
 	const [search, setSearch] = useState<string>('');
+	const [region, setRegion] = useState<string>('');
 
 	const setAllCountries = useSetRecoilState(CountriesState);
-	const searchCountries = useRecoilValue(CountriesSearchSelector(search));
+	const searchCountries = useRecoilValue(
+		CountriesSearchSelector([search, region])
+	);
 
 	const { Option } = Select;
 
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
+	};
+
+	const handleRegionSelect = (value: string | undefined) => {
+		value ? setRegion(value) : setRegion('');
 	};
 
 	const regions = Object.values(Region);
@@ -31,11 +48,6 @@ function Countries() {
 			setAllCountries(res.data);
 		});
 	}, [setAllCountries]);
-
-	// Logging searchedCountries onChange
-	useEffect(() => {
-		console.log(searchCountries);
-	}, [searchCountries]);
 
 	return (
 		<div className='countries'>
@@ -53,6 +65,7 @@ function Countries() {
 						className='countries-region-select'
 						popupClassName='countries-region-select-dropdown'
 						allowClear
+						onChange={handleRegionSelect}
 						placeholder='Filter by Region'>
 						{regions.map((region) => (
 							<Option key={region} value={region}>
@@ -60,6 +73,11 @@ function Countries() {
 							</Option>
 						))}
 					</Select>
+				</div>
+				<div className='countries-list'>
+					{searchCountries.map((country, index) => {
+						return <CountryCard key={index} country={country} />;
+					})}
 				</div>
 			</div>
 		</div>

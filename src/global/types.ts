@@ -29,4 +29,5 @@ export type Country = {
 	};
 	borders: string[];
 	population: number;
+	cca3: string;
 };

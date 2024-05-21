@@ -1,13 +1,21 @@
 import { useEffect } from 'react';
+
+// Recoil
 import { useRecoilValue } from 'recoil';
 import { DarkModeState } from './store/ThemeAtom';
+import { SelectedCountryState } from './store/CountriesAtom';
+
+// Components
+import Countries from './components/Countries/Countries';
 import Header from './components/Header/Header';
 
+// Styles
 import './App.css';
-import Countries from './components/Countries/Countries';
+import CountryDetails from './components/Countries/CountryDetails';
 
 function App() {
 	const isDark = useRecoilValue(DarkModeState);
+	const selectedCountry = useRecoilValue(SelectedCountryState);
 
 	// Handling theme
 	useEffect(() => {
@@ -21,7 +29,7 @@ function App() {
 	return (
 		<div className='app-container'>
 			<Header />
-			<Countries />
+			{selectedCountry.name ? <CountryDetails /> : <Countries />}
 		</div>
 	);
 }

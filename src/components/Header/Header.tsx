@@ -1,8 +1,12 @@
+// Recoil
 import { useRecoilState } from 'recoil';
 import { DarkModeState } from '../../store/ThemeAtom';
+
+// Assets
 import darkModeIcon from '../../assets/icons/dark-mode-icon.svg';
 import lightModeIcon from '../../assets/icons/light-mode-icon.svg';
 
+// Styles
 import './styles/header.css';
 
 function Header() {
