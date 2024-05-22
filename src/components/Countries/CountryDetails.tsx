@@ -61,7 +61,7 @@ function CountryDetails() {
 								</p>
 								<p className='country-details-content-info-item'>
 									<span>Capital: </span>
-									{country.capital}
+									{country.capital.join(', ')}
 								</p>
 							</div>
 							<div className='country-details-content-info-column'>

@@ -37,7 +37,7 @@ function CountryCard({ country }: CountryCardProps) {
 					</p>
 					<p className='country-info-item'>
 						<span>Capital: </span>
-						{country.capital}
+						{country.capital.join(', ')}
 					</p>
 				</div>
 			</div>
