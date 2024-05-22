@@ -44,9 +44,12 @@ function Countries() {
 
 	// To minimize network calls, one call is made to fetch all countries and searching is handled on the frontend
 	useEffect(() => {
-		axios.get(BASE_URL + FIELDS_PARAM).then((res) => {
-			setAllCountries(res.data);
-		});
+		axios
+			.get(BASE_URL + FIELDS_PARAM)
+			.then((res) => {
+				setAllCountries(res.data);
+			})
+			.catch(() => alert('Error while fetching data, please try again later.'));
 	}, [setAllCountries]);
 
 	return (
